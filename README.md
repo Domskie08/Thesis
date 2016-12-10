@@ -56,8 +56,7 @@ void setup() {
   lcd.print("Loading...");
   delay(2000);
   lcd.clear();
-  pinMode(switchPin,INPUT); ///////////////////IR sensor
-//////
+  pinMode(switchPin,INPUT); ///////////////////IR sensor//////
 pinMode(LPWM,OUTPUT);
 pinMode(RPWM,OUTPUT);
 pinMode(L_EN,OUTPUT);
@@ -68,11 +67,8 @@ pinMode (switchL,INPUT);
 pinMode (ge,OUTPUT);
 pinMode (gd,OUTPUT);
 }
-
-
-
-
-void loop(){
+void loop()
+{
   
     key=0;
     gauge=0;
@@ -103,8 +99,8 @@ void loop(){
   
 }
 
-
-void enterGrams(){
+void enterGrams()
+{
   
        lcd.clear();
        lcd.setCursor(0,0);
@@ -146,8 +142,9 @@ void enterGrams(){
                   }
             }
 }
-void summary(){
- 
+
+void summary()
+{
               turns=0;
               lcd.clear();
               lcd.setCursor(0,0);
@@ -174,7 +171,9 @@ void summary(){
                   }  
               
 }
-void enterGauge(){
+
+void enterGauge()
+{
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("Enter Gauge:");
@@ -198,14 +197,15 @@ void enterGauge(){
         else{
           lcd.print(gauge);
           }}}
-void readkeyboard(){
+          
+void readkeyboard()
+{
 keyboardValue = 0; // read the keyboard value (0 - 1023)
  while (keyboardValue < 49){
    //do nothing until a key is pressed
- keyboardValue = analogRead(keyboardPin); 
- 
-}//end of do nothing till a key is pressed                           
-//read the keyboard routine
+ keyboardValue = analogRead(keyboardPin);  
+} //end of do nothing till a key is pressed                           
+ //read the keyboard routine
    while (keyboardValue > 48) {
    keyboardValue = analogRead(keyboardPin); // read the value (0-1023)
    delay(250);
@@ -224,10 +224,10 @@ keyboardValue = 0; // read the keyboard value (0 - 1023)
   if ((keyboardValue >970) && (keyboardValue < 982)){key = 2;} //#ok
   if (keyboardValue >982){keyboardValue=0;}
   //NOTE: the values used above are all halfway between the value obtained with each keypress in previous test sketch 
-   }//wait until key no longer being pressed before continuing
-   
+   } //wait until key no longer being pressed before continuing 
   }
- int gramsTurns(long gramsValue, long gaugeValue){
+ int gramsTurns(long gramsValue, long gaugeValue)
+ {
  int result=0;
     if(gaugeValue==20){
         result=gramsValue * 1;}
@@ -271,12 +271,14 @@ keyboardValue = 0; // read the keyboard value (0 - 1023)
         result=gramsValue * 10;}
     else if(gaugeValue==40){
         result=gramsValue * 1;}
-      return result;}
+      return result;
+      }
 
   class Thesis{ //Class named Thesis
   public: //Object under public can be access.
   void finishing(){ //Object named finishing
-    while(1){
+    while(1)
+    {
           sw1=digitalRead(switchR);// guide switching
           sw2=digitalRead(switchL);
                   if (sw1==LOW){
@@ -284,13 +286,15 @@ keyboardValue = 0; // read the keyboard value (0 - 1023)
                   else if (sw2==LOW){
                   digitalWrite(gd,LOW);
                   break;}}}
-   void notify(){//Object named notify
+   void notify()
+   { //Object named notify
         lcd.clear();
         lcd.setCursor(0,0);
         lcd.print("Finishing...");
         delay(2000);}
         
-  void slowTofast(int gaugeForCount){
+  void slowTofast(int gaugeForCount)
+  {
         if(((gaugeForCount>=33) && (gaugeForCount<=35)) && (motorSpeed<=40) ){
                 motorSpeed++;
              delay(100);}
@@ -327,6 +331,7 @@ keyboardValue = 0; // read the keyboard value (0 - 1023)
            digitalWrite(L_EN,HIGH);
            analogWrite(RPWM,motorSpeed); //Motor turns on
            }
+           
   void pauseCounter(){
   }};
   void pauseplay(int pause){
@@ -344,7 +349,9 @@ keyboardValue = 0; // read the keyboard value (0 - 1023)
           }
           delay(10);
 }
-void count(int gaugeForCount){
+
+void count(int gaugeForCount)
+{
   Thesis myProcedure; //an intance of Object Thesis
   motorSpeed=5;
   counter=0;
@@ -356,7 +363,8 @@ void count(int gaugeForCount){
           sw1=digitalRead(switchR);// guide switching
           sw2=digitalRead(switchL);
           val = digitalRead(switchPin); // read input value
-              if (val == HIGH) { // check if the input is HIGH (button released)
+              if (val == HIGH) 
+              { // check if the input is HIGH (button released)
               if (currentState==0){
               currentState=1;
               counter=counter+1;
@@ -376,13 +384,11 @@ void count(int gaugeForCount){
           digitalWrite(L_EN,LOW);
           analogWrite(RPWM,0);}   //Motor turns off
     }
+    
        //Multitasking Print "Finishing while motor aligning process"
        myProcedure.notify(); //access the object notify and do its procedure
        myProcedure.finishing(); // access the object finishing and to its procedure
           lcd.setCursor(0,1);
-          lcd.print("Done");//WHILE LOOP
+          lcd.print("Done"); //WHILE LOOP
           delay(2000);
 }
-              
-
-
