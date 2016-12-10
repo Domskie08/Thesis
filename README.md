@@ -95,7 +95,6 @@ void loop(){
     else{
       enterGrams();  
       
-      
     }
         
     break;
